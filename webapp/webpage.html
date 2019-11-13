@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- Aaron Burns - webpage -->
+<!-- Webpage which contains a canvas that can read symbol drawn on it via users mouse -->
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Digit Recogniser</title>
+    <style>
+      #canvasDiv{
+      margin: 0px auto;
+      text-align: center;
+      width: 600px;
+      height: 600px;
+      }
+      #buttonDiv{
+        margin: 0px auto;
+        text-align: center;
+        padding: 20px;
+      }
+      #canvasID{
+        border: 1px solid #f80000;
+      }
+      #saveBtn{
+        background-color: #00fb89; /* Green */
+        color: #000000;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 12px;
+      }
+      #resetBtn{
+        background-color: #ffdc00; /* Green */
+        color: #000000;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 16px;
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+  <body data-rsssl=1>
+    <div id="canvasDiv">
+        <canvas id="canvasID"></canvas>
+    </div>
+    <div id="buttonDiv">
+        <button id="saveBtn">Save</button> <button id="resetBtn">Reset</button>
+    </div>
+  </body>
+  <!--Import for JQuery-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script>
+    // Adpated from: https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
+
+    //Drawing on the canvas =============================================================
+    // getting the canvas from the body
+    var canvas = document.getElementById('canvasID');
+    // creating a var to draw the digits
+    var ctx = canvas.getContext('2d');
+
+    // getting the id of the div the canvas is contained in
+    var painting = document.getElementById('canvasDiv');
+    var paint_style = getComputedStyle(painting);
+
+    // get the width and height of the canvas from the canvas element in the html tag
+    canvas.width = parseInt(paint_style.getPropertyValue('width'));
+    canvas.height = parseInt(paint_style.getPropertyValue('height'));
+
+    // set the params of the mouse to 0, 0
+    var mouse = {x: 0, y: 0};
+
+    // determine and correct to offset of the mouse on the canvas
+    canvas.addEventListener('mousemove',  function(e){
+      mouse.x = e.pageX - this.offsetLeft;
+      mouse.y = e.pageY - this.offsetTop;
+    }, false);
+
+    // Changing the properties of the ctx
+    ctx.lineWidth =5;
+    ctx.lineJoin = 'round';
+    ctx.linCap = 'round';
+    ctx.strokeStyle= '#OOCC99';
+
+    canvas.addEventListener('mousedown',function(e){
+      ctx.beginPath();
+      ctx.moveTo(mouse.x, mouse.y);
+      canvas.addEventListener('mousemove', onPaint, false);
+    }, false);
+
+    canvas.addEventListener('mouseup', function(e){
+      canvas.removeEventListener('mousemove', onPaint, false);
+    }, false);
+
+    var onPaint = function() {
+      ctx.lineTo(mouse.x, mouse.y);
+      ctx.stroke();
+    };
+
+    // JQuery Methods ===========================================================
+    $('#resetBtn').click(function(){
+      var canvas = document.getElementById('canvasID');
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0,  canvas.width, canvas.height);
+    });
+
+
+    var dataURL = canvas.toDataURL("image.png");
+    file_put_contents("image.jpg", base64_decode(explode(",", $_GET['data'])[1]));
+  </script>
+</html>
