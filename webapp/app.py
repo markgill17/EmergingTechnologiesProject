@@ -15,8 +15,6 @@ def convertImage():
     # get the image from the request
     encodedImage = fl.request.values[('imgBase64')]
 
-    # decode the dataURL
-    # remove the added part of the url start from the 22 index of the image array
     decodedImage = base64.b64decode(encodedImage[22:])
 
     # save the image
