@@ -7,6 +7,7 @@ app = fl.Flask(__name__)
 
 @app.route('/')
 def home():
+    #webpage.html used as the home page
     return app.send_static_file('webpage.html')
 
 
