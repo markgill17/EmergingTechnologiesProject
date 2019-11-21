@@ -13,9 +13,9 @@ def home():
 
 @app.route('/predictDigit', methods=['POST'])
 def convertImage():
+
     # get the image from the request
     encodedImage = fl.request.values[('imgBase64')]
-
     decodedImage = base64.b64decode(encodedImage[22:])
 
     # save the image
