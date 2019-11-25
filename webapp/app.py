@@ -1,9 +1,14 @@
-import flask as fl
 import base64
-import numpy as np
+import flask as fl
+import cv2
+
+from PIL import Image, ImageOps
 
 app = fl.Flask(__name__)
 
+height = 28
+width = 28
+size = height, width
 
 @app.route('/')
 def home():
@@ -21,6 +26,12 @@ def convertImage():
     # save the image
     with open('image.png', 'wb') as f:
         f.write(decodedImage)
+
+    # ANTIALIAS removes the "stair-step" look
+    userImage = Image.open("image.png")
+
+    newImage = ImageOps.fit(userImage, size, Image.ANTIALIAS)
+
 
     return encodedImage
 
