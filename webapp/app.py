@@ -31,13 +31,21 @@ def convertImage():
     with open('image.png', 'wb') as f:
         f.write(decodedImage)
 
+    # open the created image
+    createdImage = Image.open("image.png")
+
     # ANTIALIAS removes the "stair-step" look
-    userImage = Image.open("image.png")
+    newImage = ImageOps.fit(createdImage, size, Image.ANTIALIAS)
 
+    # saving resized image (28x28)
+    newImage.save("imageCropped.png")
 
+    # loading newly shaped
+    cv2Img = cv2.imread("imageCropped.png")
 
     return encodedImage
 
 # Recommended to have this
 if __name__ == "__main__":
     app.run(debug = True)
+
