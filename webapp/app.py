@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image, ImageOps
 
 from keras.models import load_model
-# model = load_model('../model.h5')
+model = load_model('../model.h5')
 
 app = fl.Flask(__name__)
 
@@ -16,7 +16,7 @@ size = height, width
 
 @app.route('/')
 def home():
-    #webpage.html used as the home page
+    # webpage.html used as the home page
     return app.send_static_file('webpage.html')
 
 
