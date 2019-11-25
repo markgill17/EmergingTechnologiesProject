@@ -12,6 +12,7 @@
       text-align: center;
       width: 400px;
       height: 400px;
+      background-color: black;
       }
       #buttonDiv{
         margin: 0px auto;
@@ -76,10 +77,10 @@
       mouse.y = e.pageY - this.offsetTop;
     }, false);
 
-    ctx.lineWidth =5;
+    ctx.lineWidth =10;
     ctx.lineJoin = 'round';
     ctx.linCap = 'round';
-    ctx.strokeStyle= '#OOCC99';
+    ctx.strokeStyle= '#AAAAAA';
 
     canvas.addEventListener('mousedown',function(e){
       ctx.beginPath();

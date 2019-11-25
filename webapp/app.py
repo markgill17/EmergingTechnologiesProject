@@ -6,7 +6,7 @@ import numpy as np
 from PIL import Image, ImageOps
 
 from keras.models import load_model
-model = load_model('../model.h5')
+# model = load_model('../model.h5')
 
 app = fl.Flask(__name__)
 
@@ -42,6 +42,10 @@ def convertImage():
 
     # loading newly shaped
     cv2Img = cv2.imread("imageCropped.png")
+
+    # converting to greyscale and reshaping
+    grayScaleImg = cv2.cvtColor(cv2Img, cv2.COLOR_BGR2GRAY)
+    grayScaleArr = np.array(grayScaleImg).reshape(1, 784)
 
     return encodedImage
 
