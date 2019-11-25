@@ -1,8 +1,12 @@
 import base64
 import flask as fl
 import cv2
+import numpy as np
 
 from PIL import Image, ImageOps
+
+from keras.models import load_model
+model = load_model('../model.h5')
 
 app = fl.Flask(__name__)
 
@@ -30,7 +34,6 @@ def convertImage():
     # ANTIALIAS removes the "stair-step" look
     userImage = Image.open("image.png")
 
-    newImage = ImageOps.fit(userImage, size, Image.ANTIALIAS)
 
 
     return encodedImage
