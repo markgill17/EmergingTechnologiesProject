@@ -6,39 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Digit Recogniser</title>
-    <style>
-      #canvasDiv{
-      margin: 0px auto;
-      text-align: center;
-      width: 400px;
-      height: 400px;
-      background-color: black;
-      }
-      #buttonDiv{
-        margin: 0px auto;
-        text-align: center;
-        padding: 20px;
-      }
-      #canvasID{
-        border: 1px solid #f80000;
-      }
-      #saveBtn{
-        background-color: #00fb89;
-        color: #000000;
-        padding: 10px 20px;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 12px;
-      }
-      #resetBtn{
-        background-color: #ffdc00;
-        color: #000000;
-        padding: 10px 20px;
-        text-align: center;
-        font-size: 16px;
-        border-radius: 12px;
-      }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/webpage.css') }}">
   </head>
   <body data-rsssl=1>
     <div id="canvasDiv">
@@ -47,78 +15,12 @@
     <div id="buttonDiv">
         <button id="saveBtn">Save</button> <button id="resetBtn">Clear</button>
     </div>
+    <div id="predictionDiv">
+        <p>Prediction:</p>
+        <p id="predictDigit"></p>
+    </div>
   </body>
   <!--Import for JQuery-->
-  <script
-        src="https://code.jquery.com/jquery-3.4.1.js"
-        ></script>
-  <script>
-    // Adpated from: https://www.html5canvastutorials.com/labs/html5-canvas-paint-application/
-
-    //Drawing on the canvas
-    // getting the canvas using the id tag
-    var canvas = document.getElementById('canvasID');
-    // creating var: ctx
-    var ctx = canvas.getContext('2d');
-
-    var painting = document.getElementById('canvasDiv');
-    var paint_style = getComputedStyle(painting);
-
-    // setting width and height to values set in html
-    canvas.width = parseInt(paint_style.getPropertyValue('width'));
-    canvas.height = parseInt(paint_style.getPropertyValue('height'));
-
-    // set mouse to 0, 0
-    var mouse = {x: 0, y: 0};
-
-    // offset mouse
-    canvas.addEventListener('mousemove',  function(e){
-      mouse.x = e.pageX - this.offsetLeft;
-      mouse.y = e.pageY - this.offsetTop;
-    }, false);
-
-    ctx.lineWidth =10;
-    ctx.lineJoin = 'round';
-    ctx.linCap = 'round';
-    ctx.strokeStyle= '#AAAAAA';
-
-    canvas.addEventListener('mousedown',function(e){
-      ctx.beginPath();
-      ctx.moveTo(mouse.x, mouse.y);
-      canvas.addEventListener('mousemove', onPaint, false);
-    }, false);
-
-    canvas.addEventListener('mouseup', function(e){
-      canvas.removeEventListener('mousemove', onPaint, false);
-    }, false);
-
-    var onPaint = function() {
-      ctx.lineTo(mouse.x, mouse.y);
-      ctx.stroke();
-    };
-
-    // JQuery Methods ===========================================================
-    $('#resetBtn').click(function(){
-      // the reset button clears the contents of the canvas
-      ctx.clearRect(0, 0,  canvas.width, canvas.height);
-    });
-
-        // Save the Canvas
-    $('#saveBtn').click(function() {
-      // save button uses ajax to make a post request
-      var canvas = document.getElementById("canvasID");
-      var dataURL = canvas.toDataURL();
-      console.log(dataURL);
-      $.ajax({
-        type: 'POST',
-        url: '/predictDigit',
-        data: {
-          imgBase64: dataURL
-        }
-      }).done(function (e) {
-        // console log for testing purposes
-        console.log('SENT');
-      });
-    });
-  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="{{ url_for('static', filename='js/webpage.js') }}"></script>
 </html>

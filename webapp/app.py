@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 
 from PIL import Image, ImageOps
+from flask import render_template
 
 from keras.models import load_model
 model = load_model('../model.h5')
@@ -17,7 +18,7 @@ size = height, width
 @app.route('/')
 def home():
     # webpage.html used as the home page
-    return app.send_static_file('webpage.html')
+    return render_template('webpage.html')
 
 
 @app.route('/predictDigit', methods=['POST'])
@@ -47,7 +48,13 @@ def convertImage():
     grayScaleImg = cv2.cvtColor(cv2Img, cv2.COLOR_BGR2GRAY)
     grayScaleArr = np.array(grayScaleImg).reshape(1, 784)
 
-    return encodedImage
+    setPrediction = model.predict(grayScaleArr)
+    getPrediction = np.array(setPrediction[0])
+
+    predictedDigit = str(np.argmax(getPrediction))
+    print(predictedDigit)
+
+    return predictedDigit
 
 # Recommended to have this
 if __name__ == "__main__":
