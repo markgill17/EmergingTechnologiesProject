@@ -46,11 +46,13 @@ def convertImage():
 
     # converting to greyscale and reshaping
     grayScaleImg = cv2.cvtColor(cv2Img, cv2.COLOR_BGR2GRAY)
-    grayScaleArr = np.array(grayScaleImg).reshape(1, 784)
+    grayScaleArr = np.array(grayScaleImg).reshape(1, 784) #28x28
 
+    # using our model that we saved and imported to run our saved, cropped image.
     setPrediction = model.predict(grayScaleArr)
     getPrediction = np.array(setPrediction[0])
 
+    # returning our predicted digit as a string to display
     predictedDigit = str(np.argmax(getPrediction))
     print(predictedDigit)
 

@@ -12,6 +12,12 @@
     padding: 20px;
 }
 
+#predictionDiv {
+    margin: 0px auto;
+    text-align: center;
+    padding: 20px;
+}
+
 #canvasID {
     border: 1px solid #f80000;
 }
