@@ -1,13 +1,17 @@
+body{
+    background-color: #000000;
+}
+
 #canvasDiv {
-    margin: 0px auto;
+    margin: 50px auto;
     text-align: center;
-    width: 400px;
-    height: 400px;
+    width: 600px;
+    height: 600px;
     background-color: black;
 }
 
 #buttonDiv {
-    margin: 0px auto;
+    margin: 10px;
     text-align: center;
     padding: 20px;
 }
@@ -16,6 +20,7 @@
     margin: 0px auto;
     text-align: center;
     padding: 20px;
+    color: #00fff4;
 }
 
 #canvasID {
@@ -23,7 +28,7 @@
 }
 
 #saveBtn {
-    background-color: #00fb89;
+    background-color: #0043fb;
     color: #000000;
     padding: 10px 20px;
     text-align: center;
