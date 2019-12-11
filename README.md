@@ -19,7 +19,7 @@ Keras is a deep learning library used on top TensorFlow. It keeeps it's APIs sim
 The MNIST database (Modified National Institute of Standards and Technology database) is a database of hand-written digits. It's used to train neural networks and is commonly used in machine learning. The images from the MNIST dataset were normalized to fit 28x28 pixel bounding and converted to greyscale. Via: https://en.wikipedia.org/wiki/MNIST_database
 
 ### PIL
-PIL(Python Image Library) is also known as Pillow. It is a free library that supports opening, manipulating and saving many different image file formats. Via: https://en.wikipedia.org/wiki/Python_Imaging_Library
+PIL(Python Image Library) is also known as Pillow. It is a free library that supports opening, manipulating and saving many different image file formats. Via: https://en.wikipedia.org/wiki/Python_Imaging_Library.
 In my project, I use the Image function to open the image. I also used the ImageOps function to reshape the image.
 
 ### OpenCV
